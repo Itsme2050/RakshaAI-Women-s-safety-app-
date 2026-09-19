@@ -194,8 +194,8 @@ Please respond directly to the user in their language (English or Hindi). Do not
     const modelsToTry = [
       'gemini-1.5-flash',
       'gemini-2.0-flash',
-      'gemini-2.5-flash',
-      'gemini-1.5-flash-8b'
+      'gemini-1.5-pro',
+      'gemini-2.5-flash'
     ];
 
     let response = null;
@@ -249,8 +249,14 @@ Please respond directly to the user in their language (English or Hindi). Do not
 
   } catch (error) {
     console.error('[RakshaServer Error] Failed calling Gemini API:', error.message);
+    const isApiKeyError = error.message.includes('API key') || error.message.includes('400') || error.message.includes('403');
+    
+    let noticeText = isApiKeyError ?
+      "\n\n(⚠️ Gemini API Key Issue: The API Key configured in Vercel Environment Variables is invalid or rejected by Google. Please generate a free key at https://aistudio.google.com/app/apikey (starts with 'AIzaSy') and set AI_API_KEY in Vercel.)" :
+      "\n\n(AI Assistant is operating in local backup mode due to server connectivity issues.)";
+
     return res.json({
-      text: localChat(message, lang) + "\n\n(AI Assistant is operating in local backup mode due to server connectivity issues.)",
+      text: localChat(message, lang) + noticeText,
       fallback: true
     });
   }
