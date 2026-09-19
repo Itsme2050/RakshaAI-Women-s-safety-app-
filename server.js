@@ -6,8 +6,13 @@ const path = require('path');
 // Load environment variables
 dotenv.config();
 
-// Sanitize API Key to fix Windows carriage return issues
-const API_KEY = (process.env.AI_API_KEY || '').replace(/\r/g, '').trim();
+const API_KEY = (
+  process.env.AI_API_KEY || 
+  process.env.GEMINI_API_KEY || 
+  process.env.GOOGLE_API_KEY || 
+  process.env.REACT_APP_GEMINI_API_KEY || 
+  ''
+).replace(/["'\r\n]/g, '').trim();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -184,10 +189,13 @@ Please respond directly to the user in their language (English or Hindi). Do not
     });
 
     const modelsToTry = [
+      'gemini-1.5-flash',
+      'gemini-2.0-flash',
+      'gemini-2.5-flash',
+      'gemini-1.5-flash-8b',
       'gemini-3.5-flash-lite',
       'gemini-3.5-flash',
       'gemini-2.5-flash-lite',
-      'gemini-2.5-flash',
       'gemini-3.7-flash',
       'gemini-3.6-flash'
     ];
@@ -298,9 +306,11 @@ You must respond ONLY with a JSON object. Do not write markdown, code blocks, or
 }`;
 
     const modelsToTry = [
-      'gemini-3.6-flash',
+      'gemini-1.5-flash',
+      'gemini-2.0-flash',
+      'gemini-2.5-flash',
       'gemini-3.5-flash',
-      'gemini-2.5-flash'
+      'gemini-3.6-flash'
     ];
 
     let response = null;
