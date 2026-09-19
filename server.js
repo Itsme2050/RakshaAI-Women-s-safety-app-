@@ -192,12 +192,7 @@ Please respond directly to the user in their language (English or Hindi). Do not
       'gemini-1.5-flash',
       'gemini-2.0-flash',
       'gemini-2.5-flash',
-      'gemini-1.5-flash-8b',
-      'gemini-3.5-flash-lite',
-      'gemini-3.5-flash',
-      'gemini-2.5-flash-lite',
-      'gemini-3.7-flash',
-      'gemini-3.6-flash'
+      'gemini-1.5-flash-8b'
     ];
 
     let response = null;
@@ -207,7 +202,7 @@ Please respond directly to the user in their language (English or Hindi). Do not
     for (const model of modelsToTry) {
       try {
         console.log(`[RakshaServer] Attempting /api/chat call with model: ${model}`);
-        response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`, {
+        response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -308,9 +303,7 @@ You must respond ONLY with a JSON object. Do not write markdown, code blocks, or
     const modelsToTry = [
       'gemini-1.5-flash',
       'gemini-2.0-flash',
-      'gemini-2.5-flash',
-      'gemini-3.5-flash',
-      'gemini-3.6-flash'
+      'gemini-2.5-flash'
     ];
 
     let response = null;
@@ -320,7 +313,7 @@ You must respond ONLY with a JSON object. Do not write markdown, code blocks, or
     for (const model of modelsToTry) {
       try {
         console.log(`[RakshaServer] Attempting /api/classify call with model: ${model}`);
-        response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`, {
+        response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

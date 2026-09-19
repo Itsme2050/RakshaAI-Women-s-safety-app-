@@ -5747,12 +5747,16 @@ function AssistantPage({ lang, safetyReports, userCoords, aiEnabled, messages, s
       }
     };
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 7000);
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        signal: controller.signal,
         body: JSON.stringify({
           message: msg,
           history: messages.slice(-6),
@@ -5760,6 +5764,7 @@ function AssistantPage({ lang, safetyReports, userCoords, aiEnabled, messages, s
           lang: lang
         })
       });
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error('API server returned error');
