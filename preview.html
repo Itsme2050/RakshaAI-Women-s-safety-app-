@@ -3982,7 +3982,7 @@ function JourneyPage({ onNavigate, lang, safetyReports, activeJourney, onStartJo
       }).setView([originCoords.lat, originCoords.lng], 13);
 
       // Voyager light style map
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
       }).addTo(map);
       mapInstance.current = map;
@@ -4457,7 +4457,7 @@ function MapPage({ lang, safetyReports, setSafetyReports, activeJourney, userCoo
       }).setView([userCoords.lat, userCoords.lng], 14);
 
       // Light tile layer Voyager
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
       }).addTo(map);
 
