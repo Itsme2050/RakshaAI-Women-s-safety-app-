@@ -2663,7 +2663,12 @@ function AssistantPage({ lang, safetyReports, userCoords, aiEnabled, messages, s
   };
 
   const getAIResponseLocal = (userInput, currentLang) => {
-    const text = userInput.toLowerCase();
+    const text = userInput.toLowerCase().trim();
+    if (text === 'hi' || text === 'hello' || text === 'hey' || text.includes('namaste') || text.includes('greetings')) {
+      return currentLang === 'hi' ? 
+        "नमस्ते! 👋 मैं रक्षाAI सहायक हूँ। आज मैं आपकी सुरक्षा में कैसे मदद कर सकता हूँ? आप मुझसे सुरक्षित मार्गों, आपातकालीन संपर्कों, कानूनी अधिकारों या SOS सुविधाओं के बारे में पूछ सकते हैं।" : 
+        "Hello! 👋 I'm RakshaAI Assistant. How can I help you stay safe today? You can ask me about safe routes, emergency contacts, legal rights, or SOS features.";
+    }
     if (text.includes('safe') && text.includes('night') || text.includes('route') && text.includes('night') || text.includes('raat')) return t('route_safe_night');
     if (text.includes('share') || text.includes('location') || text.includes('sajha')) return t('share_location');
     if (text.includes('unsafe') || text.includes('scared') || text.includes('danger') || text.includes('help') || text.includes('khatra')) return t('feel_unsafe');
@@ -2671,7 +2676,10 @@ function AssistantPage({ lang, safetyReports, userCoords, aiEnabled, messages, s
     if (text.includes('sos') || text.includes('button')) return t('activate_sos');
     if (text.includes('score') || text.includes('percent') || text.includes('rating') || text.includes('skor')) return t('safety_score');
     if (text.includes('why') && (text.includes('safer') || text.includes('recommended') || text.includes('route'))) return "🛡️ " + t('whySafer') + ": The safest route has 0 recent safety reports, keeps you on major illuminated thoroughfares, and has police/medical services nearby, unlike the fastest route which contains unlit segments.";
-    return t('default');
+    
+    return currentLang === 'hi' ? 
+      "मैं आपकी सुरक्षा के लिए यहाँ हूँ। मैं सुरक्षित मार्गों, आपातकालीन हेल्पलाइन और SOS सुविधाओं में सहायता कर सकता हूँ। आपात स्थिति में 100 या 1091 पर कॉल करें।" : 
+      "I am here to assist with your safety. I can help with safe route recommendations, emergency guidelines, legal awareness, and SOS features. In an emergency, please call 100 or 1091.";
   };
 
   return (

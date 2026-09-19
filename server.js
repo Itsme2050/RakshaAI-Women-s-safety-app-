@@ -72,6 +72,7 @@ function localChat(message = '', lang = 'en') {
   const text = message.toLowerCase();
   
   const responsesEn = {
+    greeting: "Hello! 👋 I'm RakshaAI Assistant. How can I help you stay safe today? You can ask me about safe routes, emergency contacts, legal rights, or SOS features.",
     night: "🌙 At night, Route C (Safer Route) is recommended. It stays on well-lit main roads with active shops. Avoid Cubbon Park Lane or Shivajinagar Road where poor lighting and isolation are reported.",
     sos: "🚨 To activate SOS, tap the red SOS button on the dashboard or long-press it for 3 seconds. It will notify your trusted contacts with your live location. Call Police at 100 for emergencies.",
     unsafe: "🆘 If you feel unsafe, immediately move to a well-lit, busy area. Share your live location, activate SOS, and call the Police (100) or Women Helpline (1091). Do not stay isolated.",
@@ -80,6 +81,7 @@ function localChat(message = '', lang = 'en') {
   };
 
   const responsesHi = {
+    greeting: "नमस्ते! 👋 मैं रक्षाAI सहायक हूँ। आज मैं आपकी सुरक्षा में कैसे मदद कर सकता हूँ? आप मुझसे सुरक्षित मार्गों, आपातकालीन संपर्कों, कानूनी अधिकारों या SOS सुविधाओं के बारे में पूछ सकते हैं।",
     night: "🌙 रात में, मार्ग सी (सुरक्षित मार्ग) की सिफारिश की जाती है। यह सक्रिय दुकानों के साथ अच्छी रोशनी वाली मुख्य सड़कों पर रहता है। कब्बन पार्क लेन या शिवाजीनगर रोड से बचें जहाँ कम रोशनी की रिपोर्ट है।",
     sos: "🚨 SOS को सक्रिय करने के लिए, डैशबोर्ड पर लाल SOS बटन दबाएं या इसे 3 सेकंड तक दबाए रखें। यह आपके विश्वसनीय संपर्कों को आपके लाइव स्थान के साथ सूचित करेगा। आपात स्थिति के लिए 100 पर कॉल करें।",
     unsafe: "🆘 यदि आप असुरक्षित महसूस करते हैं, तो तुरंत अच्छी रोशनी वाले और भीड़भाड़ वाले क्षेत्र में जाएं। अपना स्थान साझा करें, SOS सक्रिय करें, और पुलिस (100) या महिला हेल्पलाइन (1091) को कॉल करें।",
@@ -89,6 +91,7 @@ function localChat(message = '', lang = 'en') {
 
   const pool = lang === 'hi' ? responsesHi : responsesEn;
 
+  if (text.includes('hi') || text.includes('hello') || text.includes('hey') || text.includes('namaste')) return pool.greeting;
   if (text.includes('night') || text.includes('route') || text.includes('shaam') || text.includes('raat')) return pool.night;
   if (text.includes('sos') || text.includes('button') || text.includes('siren')) return pool.sos;
   if (text.includes('unsafe') || text.includes('scared') || text.includes('danger') || text.includes('help') || text.includes('bachao')) return pool.unsafe;
